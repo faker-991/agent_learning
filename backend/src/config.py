@@ -51,6 +51,11 @@ class Configuration(BaseModel):
         title="Notes Workspace",
         description="Directory for NoteTool to persist task notes",
     )
+    storage_workspace: str = Field(
+        default="./data",
+        title="Storage Workspace",
+        description="Directory for project, task, evidence, and conclusion JSON files",
+    )
     fetch_full_page: bool = Field(
         default=True,
         title="Fetch Full Page",
@@ -120,6 +125,7 @@ class Configuration(BaseModel):
             "search_api": os.getenv("SEARCH_API"),
             "enable_notes": os.getenv("ENABLE_NOTES"),
             "notes_workspace": os.getenv("NOTES_WORKSPACE"),
+            "storage_workspace": os.getenv("STORAGE_WORKSPACE"),
         }
 
         for key, value in env_aliases.items():
