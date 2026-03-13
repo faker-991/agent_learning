@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["mypy>=1.11.1", "ruff>=0.6.1"]
+dev = ["mypy>=1.11.1", "pytest>=9.0.0", "ruff>=0.6.1"]
 
 [build-system]
 requires = ["setuptools>=73.0.0", "wheel"]
@@ -62,5 +62,6 @@ convention = "google"
 
 [dependency-groups]
 dev = [
+    "pytest>=9.0.0",
     "ruff>=0.12.7",
 ]
