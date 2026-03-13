@@ -165,6 +165,7 @@ cython_debug/
 AGENTS.md
 
 # Project runtime and frontend build artifacts
+backend/.bin/
 frontend/node_modules/
 frontend/dist/
 backend/notes/
