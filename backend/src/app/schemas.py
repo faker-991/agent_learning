@@ -1,37 +1,8 @@
-"""Request and response schemas for the V1 API."""
+"""Request and response schemas for the literature research API."""
 
 from __future__ import annotations
 
 from pydantic import BaseModel, Field
-
-
-class CreateProjectRequest(BaseModel):
-    name: str = Field(..., min_length=1)
-    description: str | None = None
-    default_template_type: str | None = None
-
-
-class ProjectResponse(BaseModel):
-    id: str
-    name: str
-    description: str | None = None
-    default_template_type: str | None = None
-
-
-class CreateTaskRequest(BaseModel):
-    title: str = Field(..., min_length=1)
-    question: str = Field(..., min_length=1)
-    template_type: str = Field(..., min_length=1)
-
-
-class TaskResponse(BaseModel):
-    id: str
-    project_id: str
-    title: str
-    question: str
-    template_type: str
-    status: str
-    plan_snapshot: dict[str, object] | None = None
 
 
 class EventResponse(BaseModel):
@@ -46,14 +17,83 @@ class EventListResponse(BaseModel):
     events: list[EventResponse]
 
 
-class ConclusionCardResponse(BaseModel):
+class CreateTopicRequest(BaseModel):
+    title: str = Field(..., min_length=1)
+    description: str | None = None
+    research_domain: str = Field(..., min_length=1)
+
+
+class TopicResponse(BaseModel):
     id: str
-    task_id: str
-    project_id: str
+    title: str
+    description: str | None = None
+    research_domain: str
+    default_time_window: int
+
+
+class CreateResearchSessionRequest(BaseModel):
+    question: str = Field(..., min_length=1)
+    intent_type: str = Field(..., min_length=1)
+    time_window_years: int = Field(default=2, ge=1)
+
+
+class ResearchSessionResponse(BaseModel):
+    id: str
+    workspace_id: str
+    question: str
+    intent_type: str
+    time_window_years: int
+    status: str
+    plan_snapshot: dict[str, object] | None = None
+    retrieved_paper_ids: list[str] = []
+    selected_paper_ids: list[str] = []
+    research_card_id: str | None = None
+
+
+class ResearchCardResponse(BaseModel):
+    id: str
+    workspace_id: str
+    session_id: str
     problem_definition: str
-    core_conclusion: str
-    key_evidence: list[str]
-    alternative_views: list[str]
-    recommended_actions: list[str]
-    risks_and_uncertainties: list[str]
+    representative_papers: list[str]
+    main_method_tracks: list[str]
+    method_differences: list[str]
+    research_gaps: list[str]
+    improvement_directions: list[str]
+    reading_order: list[str]
     citations: list[str]
+
+
+class PaperCardResponse(BaseModel):
+    id: str
+    workspace_id: str
+    title: str
+    authors: list[str]
+    year: int
+    venue: str
+    source: str
+    url: str
+    abstract: str
+    keywords: list[str]
+    problem: str
+    method: str
+
+
+class TopicNoteResponse(BaseModel):
+    id: str
+    workspace_id: str
+    title: str
+    summary: str
+    open_questions: list[str]
+    method_clusters: list[str]
+
+
+class IdeaNoteResponse(BaseModel):
+    id: str
+    workspace_id: str
+    title: str
+    idea_type: str
+    content: str
+    related_paper_ids: list[str]
+    confidence: float
+    status: str

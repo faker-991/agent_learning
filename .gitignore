@@ -166,7 +166,10 @@ AGENTS.md
 
 # Project runtime and frontend build artifacts
 backend/.bin/
+backend/data/
 frontend/node_modules/
 frontend/dist/
+frontend/*.tsbuildinfo
 backend/notes/
+notes/
 .superpowers/

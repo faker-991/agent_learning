@@ -1,38 +1,23 @@
-import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-function PlaceholderPage() {
-  return (
-    <main className="min-h-screen bg-slate-950 text-slate-50">
-      <div className="mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-6 py-16">
-        <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">
-          Business Research Workbench
-        </p>
-        <h1 className="mt-4 max-w-3xl text-5xl font-semibold tracking-tight">
-          React workspace scaffold is ready for the project-based redesign.
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-          The next implementation chunks will replace this placeholder with project,
-          task, evidence, and conclusion-card workflows.
-        </p>
-        <div className="mt-10 flex flex-wrap gap-4">
-          <Link className="rounded-full bg-cyan-400 px-5 py-3 text-sm font-medium text-slate-950" to="/projects">
-            Open projects route
-          </Link>
-          <span className="rounded-full border border-slate-700 px-5 py-3 text-sm text-slate-300">
-            Current route scaffold only
-          </span>
-        </div>
-      </div>
-    </main>
-  );
-}
+import { IdeaNotesPage } from "../features/idea-notes/pages/idea-notes-page";
+import { PaperCardPage } from "../features/papers/pages/paper-card-page";
+import { ResearchQaPage } from "../features/research/pages/research-qa-page";
+import { TopicNotesPage } from "../features/topic-notes/pages/topic-notes-page";
+import { TopicHomePage } from "../features/topics/pages/topic-home-page";
+import { TopicListPage } from "../features/topics/pages/topic-list-page";
 
 export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/projects" replace />} />
-        <Route path="/projects" element={<PlaceholderPage />} />
+        <Route path="/" element={<Navigate to="/topics" replace />} />
+        <Route path="/topics" element={<TopicListPage />} />
+        <Route path="/topics/:topicId" element={<TopicHomePage />} />
+        <Route path="/sessions/:sessionId" element={<ResearchQaPage />} />
+        <Route path="/papers/:paperId" element={<PaperCardPage />} />
+        <Route path="/topics/:topicId/notes" element={<TopicNotesPage />} />
+        <Route path="/topics/:topicId/ideas" element={<IdeaNotesPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,5 +1,13 @@
-"""Workflow orchestration for the business research workbench."""
+"""Workflow orchestration for literature research sessions."""
 
-from workflows.research_workflow import ResearchWorkflow, WorkflowRunResult
+from workflows.literature_workflow import (
+    LiteratureRuntimeResult,
+    LiteratureWorkflow,
+    LiteratureWorkflowRunResult,
+)
 
-__all__ = ["ResearchWorkflow", "WorkflowRunResult"]
+__all__ = [
+    "LiteratureRuntimeResult",
+    "LiteratureWorkflow",
+    "LiteratureWorkflowRunResult",
+]
